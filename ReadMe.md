@@ -5,19 +5,22 @@
 **Game:** Mount & Blade II: Bannerlord
 
 ## Why This Mod?
-In the default game, NPC Attribute Distribution can be challenging, particularly for Wanderers who may not optimize their attribute allocation based on their skills. The existing taxicab metric often leads to bad decisions by the games systems, favoring attributes that might not align with logical skill priorities.
+n the vanilla game of Mount & Blade II: Bannerlord, NPC attribute distribution can be frustrating for players. The allocation of attributes by NPCs may not seem sensible based on their skill levels, as the existing taxicab metric often leads to decisions that don't align with what players would consider logical attribute priorities.
 
-For instance, when comparing the choice between three skills at 50 and one skill at 120, any reasonable person would invest in the skill at 120. However, due to the taxicab metric's reliance, the game may incorrectly decide to allocate attributes to the three skills at 50, often favoring combat-related attributes.
+For instance, when comparing the choice between three skills at 50 and one skill at 120, any reasonable person would invest in the skill at 120. However, due to the taxicab metric's reliance, the game may incorrectly decide to allocate attributes to the three skills at 50, which often favors more combat-related attributes.
 
-This mod aims to rectify such issues by providing a more intuitive and balanced attribute distribution for NPCs, ensuring that their attribute allocations align more closely with skill priorities and result in more meaningful character development.
+This mod introduces an improved metric, enabled by default, to offer a more sensible attribute distribution for NPCs. Additionally, players have the flexibility to swap it for other distribution models, allowing customization of their experience with NPCs.
 
 ## Features
+
+### Bug Fix
+NPCs now correctly gain Attributes during their generation on levels divisible by 4, addressing an issue where it occurred on levels divisible by 4 plus 1.
 
 ### Attribute Point Spending Models
 Choose from different attribute point spending models:
 
 * **Vanilla:** Retains the original game behavior, utilizing a taxicab metric for attribute distribution.
-* **Vanilla Enhanced:** Slightly tweaks the Vanilla model by using a Euclidean metric (squared) for enhanced balance.
+* **Vanilla Enhanced (Default):** Slightly tweaks the Vanilla model by using a Euclidean metric (squared) for enhanced balance.
 * **Optimized:** Removes balance considerations and directly invests in attributes needed, optimizing attribute allocation.
 
 ### NPC Base Attribute Points
@@ -25,7 +28,7 @@ Set predefined values for the amount of attributes any NPC has available at leve
 
 * **Minimum:** 6
 * **Weak:** 12
-* **Vanilla:** 15
+* **Vanilla (Default):** 15
 * **Player:** 18
 * **Advanced:** 21
 * **Strong:** 24
@@ -45,7 +48,7 @@ This mod should be compatible with any mod, since it modifies only 3 relatively 
 ## Feedback
 If you encounter any issues or have suggestions, there are multiple ways to provide feedback:
 
-* [Submit an issue on the GitHub repository](#) for technical issues or detailed bug reports.
+* [Submit an issue on the GitHub repository](https://github.com/MatyeusM/Bannerlord-Improved-NPC-Attribute-Distribution) for technical issues or detailed bug reports.
 * Leave a comment on the [Steam Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3162455282) with your thoughts, suggestions, or feedback related to your gameplay experience.
 * Visit the [Nexus Mods page](https://www.nexusmods.com/mountandblade2bannerlord/mods/6540/) and leave your comments, suggestions, or feedback for the mod community.
 
