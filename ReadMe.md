@@ -5,7 +5,7 @@
 **Game:** Mount & Blade II: Bannerlord
 
 ## Why This Mod?
-n the vanilla game of Mount & Blade II: Bannerlord, NPC attribute distribution can be frustrating for players. The allocation of attributes by NPCs may not seem sensible based on their skill levels, as the existing taxicab metric often leads to decisions that don't align with what players would consider logical attribute priorities.
+In the vanilla game of Mount & Blade II: Bannerlord, NPC attribute distribution can be frustrating for players. The allocation of attributes by NPCs may not seem sensible based on their skill levels, as the existing taxicab metric often leads to decisions that don't align with what players would consider logical attribute priorities.
 
 For instance, when comparing the choice between three skills at 50 and one skill at 120, any reasonable person would invest in the skill at 120. However, due to the taxicab metric's reliance, the game may incorrectly decide to allocate attributes to the three skills at 50, which often favors more combat-related attributes.
 
