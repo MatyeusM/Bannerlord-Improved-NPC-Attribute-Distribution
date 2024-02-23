@@ -9,6 +9,7 @@ namespace ImprovedNPCAttributeDistribution
 {
     internal class Settings : AttributeGlobalSettings<Settings>
     {
+        // List of available starting attribute points for NPCs
         public static readonly Dictionary<string, int> AttributePointsMap = new Dictionary<string, int>
         {
             { "Minimum", 6 },
@@ -20,9 +21,11 @@ namespace ImprovedNPCAttributeDistribution
             { "Super Human", 27 },
         };
 
+        // Constants for organizing settings into groups
         private const string HeadingAttributes = "Attributes";
         private const string HeadingFocusPoints = "Focus Points";
 
+        // MCM Required Variables to save the configuration
         public override string Id => "ImprovedNPCAttributeDistribution_v1";
         public override string DisplayName => "Improved NPC Attribute Distribution";
         public override string FolderName => "AttrFix";

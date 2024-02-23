@@ -8,6 +8,12 @@ namespace ImprovedNPCAttributeDistribution.Extensions
 {
     public static class HeroExtensions
     {
+        /// <summary>
+        /// Gets the highest attribute of the hero, excluding the specified attribute.
+        /// </summary>
+        /// <param name="hero">The hero for which to find the highest attribute.</param>
+        /// <param name="exclusion">An optional attribute to exclude from consideration.</param>
+        /// <returns>The highest attribute of the hero.</returns>
         public static CharacterAttribute GetHighestAttribute(this Hero hero, CharacterAttribute? exclusion = null)
         {
             CharacterAttribute highestAttribute = Attributes.All.First();
