@@ -4,8 +4,6 @@ using MCM.Abstractions.Base.Global;
 using MCM.Common;
 using System.Collections.Generic;
 using ImprovedNPCAttributeDistribution.DistributionModels;
-using System;
-using System.Linq;
 
 namespace ImprovedNPCAttributeDistribution
 {
@@ -18,7 +16,7 @@ namespace ImprovedNPCAttributeDistribution
             { "Vanilla", 15 },
             { "Player", 18 },
             { "Advanced", 21 },
-            { "Strong", 14 },
+            { "Strong", 24 },
             { "Super Human", 27 },
         };
 
