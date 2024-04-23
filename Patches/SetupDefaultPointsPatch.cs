@@ -1,12 +1,14 @@
 ﻿using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.Library;
 
 namespace ImprovedNPCAttributeDistribution.Patches
 {
     [HarmonyPatch(typeof(HeroDeveloper), "SetupDefaultPoints")]
     internal class SetupDefaultPointsPatch
     {
+        private static int DefaultAttributePointsAtTheStart = 15;
         // A property to determine the attribute points at the start based on settings
         private static int AttributePointsAtTheStart
         {
@@ -27,7 +29,11 @@ namespace ImprovedNPCAttributeDistribution.Patches
 
             // Calculate unspent attribute points based on hero's level and custom or default attribute points value at level 1
             // Note: In the base game, it uses Hero.Level - 1, but it is corrected here for every n-Levels, instead of every n-Levels + 1, hence no subtraction.
-            __instance.UnspentAttributePoints = __instance.Hero.Level / Campaign.Current.Models.CharacterDevelopmentModel.LevelsPerAttributePoint + AttributePointsAtTheStart;
+            var unspentAttributePoints = __instance.Hero.Level / Campaign.Current.Models.CharacterDevelopmentModel.LevelsPerAttributePoint 
+                + Campaign.Current.Models.CharacterDevelopmentModel.AttributePointsAtStart - DefaultAttributePointsAtTheStart // fix if AttributePointsAtStart gets modified, to still return the correct amount
+                + AttributePointsAtTheStart;
+
+            __instance.UnspentAttributePoints = MathF.Max(unspentAttributePoints, 0); // Make sure, we stay greater or equal than 0.
 
             // Indicate that the original method should not be executed (return false)
             return false;
