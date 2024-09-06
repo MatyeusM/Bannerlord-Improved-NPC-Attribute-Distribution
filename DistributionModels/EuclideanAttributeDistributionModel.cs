@@ -18,8 +18,11 @@ namespace ImprovedNPCAttributeDistribution.DistributionModels
         /// <returns>The next attribute to upgrade.</returns>
         public override CharacterAttribute GetNextAttributeToUpgrade(Hero hero, DefaultCharacterDevelopmentModel developmentModel)
         {
-            CharacterAttribute resultAttribute = Attributes.All.First();
-            float highestScore = float.MinValue;
+            CharacterAttribute resultAttributeWithSaturation = Attributes.All.First();
+            float highestScoreWithSaturation = float.MinValue;
+
+            CharacterAttribute resultAttributeWithoutSaturation = Attributes.All.First();
+            float highestScoreWithoutSaturation = float.MinValue;
             foreach (CharacterAttribute currentAttribute in Attributes.All)
             {
                 int attributeValue = hero.GetAttributeValue(currentAttribute);
@@ -28,10 +31,10 @@ namespace ImprovedNPCAttributeDistribution.DistributionModels
                     continue;
 
                 float attributeScore = 0f;
+                bool isSaturated = true;
+
                 if (attributeValue == 0)
-                {
                     attributeScore = float.MaxValue;
-                }
                 else
                 {
                     // Iterate through all skills of the current attribute to calculate the skill score.
@@ -43,7 +46,12 @@ namespace ImprovedNPCAttributeDistribution.DistributionModels
                     // However, doing a 2-step calculation is not very efficient. I am certain there is a 1-step calculation that will allow the stats to be distributed that way.
                     foreach (SkillObject skill in currentAttribute.Skills)
                     {
-                        float skillScore = MathF.Max(0f, 75f + developmentModel.GetSkillLearningLimitDistance(hero, skill));
+                        float learningLimitDistance = developmentModel.GetSkillLearningLimitDistance(hero, skill);
+
+                        // Saturation check
+                        if (learningLimitDistance > 0) isSaturated = false;
+
+                        float skillScore = MathF.Max(0f, 75f + learningLimitDistance);
                         attributeScore += skillScore * skillScore;
                     }
 
@@ -53,14 +61,18 @@ namespace ImprovedNPCAttributeDistribution.DistributionModels
                     // so to keep the base game scaling intact, we must thus also remove the square-root here.
                     attributeScore *= normalizationFactor;
                 }
-                if (attributeScore > highestScore)
+                if (attributeScore > highestScoreWithSaturation && !isSaturated)
                 {
-                    highestScore = attributeScore;
-                    resultAttribute = currentAttribute;
+                    highestScoreWithSaturation = attributeScore;
+                    resultAttributeWithSaturation = currentAttribute;
                 }
-
+                if (attributeScore > highestScoreWithoutSaturation)
+                {
+                    highestScoreWithoutSaturation = attributeScore;
+                    resultAttributeWithoutSaturation = currentAttribute;
+                }
             }
-            return resultAttribute;
+            return highestScoreWithSaturation > float.MinValue ? resultAttributeWithSaturation : resultAttributeWithoutSaturation;
         }
     }
 }
